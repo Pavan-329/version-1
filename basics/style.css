@@ -165,17 +165,3 @@ footer {
     color: #6b7280;
     font-size: 0.95rem;
 }
-
-@media (max-width: 640px) {
-    nav {
-        flex-direction: column;
-    }
-
-    form, .card {
-        padding: 18px;
-    }
-
-    th, td {
-        padding: 12px;
-    }
-}
