@@ -12,75 +12,52 @@
     <div class="container">
         <header>
             <nav>
-                <a href="/addstudent.html">Add Student</a>
-                <a href="/viewstudents.html">View Students</a>
-                <a href="/index.html">Logout</a>
+                <a href="./addstudent.html">Add Student</a>
+                <a href="./viewstudents.html">View Students</a>
+                <a href="./index.html">Logout</a>
             </nav>
         </header>
         <main>
             <h1>View Students</h1>
-            <table>
+            <table id="table">
                 <tr>
                     <th>Roll Number</th>
                     <th>Name</th>
                     <th>Branch</th>
                     <th>CGPA</th>
                     <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
-                <tr>
-                    <td>
-                        23B81A0555
-                    </td>
-                    <td>
-                        Kiran
-                    </td>
-                    <td>
-                        CSE
-                    </td>
-                    <td>
-                        9.6
-                    </td>
-                    <td>
-                        <a href="./editStudent.html">Edit</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        23B81A05R34
-                    </td>
-                    <td>
-                        Abhiram
-                    </td>
-                    <td>
-                        CSE
-                    </td>
-                    <td>
-                        9.8
-                    </td>
-                    <td>
-                        <a href="./editStudent.html">Edit</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        23B81A0R43
-                    </td>
-                    <td>
-                        Akshu
-                    </td>
-                    <td>
-                        CSE
-                    </td>
-                    <td>
-                        8.8
-                    </td>
-                    <td>
-                        <a href="./editStudent.html">Edit</a>
-                    </td>
-                </tr>
-            </table>
-        </div>
+        </main>
     </div>
+    <script>
+        const students = JSON.parse(localStorage.getItem("students")) || [];
+        const table = document.getElementById("table");
+        for (let i = 0; i < students.length; i++) {
+            const row = table.insertRow();
+            row.insertCell(0).innerText = students[i].rollno;
+            row.insertCell(1).innerText = students[i].name;
+            row.insertCell(2).innerText = students[i].branch;
+            row.insertCell(3).innerText = students[i].cgpa;
+            const editCell = row.insertCell(4);
+            const editButton = document.createElement("button");
+            editButton.innerText = "Edit";
+            editButton.addEventListener("click", function () {
+                localStorage.setItem("editIndex", i);
+                window.location.href = "./editstudent.html";
+            });
+            editCell.appendChild(editButton);
+            const deleteCell = row.insertCell(5);
+            const deleteButton = document.createElement("button");
+            deleteButton.innerText = "Delete";
+            deleteButton.addEventListener("click", function () {
+                students.splice(i, 1);
+                localStorage.setItem("students", JSON.stringify(students));
+                window.location.reload();
+            });
+            deleteCell.appendChild(deleteButton);
+        }
+    </script>
 </body>
 
 </html>

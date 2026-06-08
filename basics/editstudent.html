@@ -10,25 +10,39 @@
     <div class="container">
         <header>
             <nav>
-                <a href="/addstudent.html">Add Student</a>
-                <a href="/viewstudents.html">View Students</a>
-                <a href="/index.html">Logout</a>
+                <a href="./addstudent.html">Add Student</a>
+                <a href="./viewstudents.html">View Students</a>
+                <a href="./index.html">Logout</a>
             </nav>
         </header>
         <main>
             <h3>Edit Student</h3>
-            <form action="./viewstudents.html">
+            <form id="editForm">
                 <label for="rollNumber">Enter the Roll Number :</label>
-                <input type="text" required>
+                <input type="text" id="rollno" required>
                 <label for="name">Enter the Name :</label>
-                <input type="text" required>
+                <input type="text" id="name" required>
                 <label for="branch">Enter the Branch:</label>
-                <input type="text" required>
+                <input type="text" id="branch" required>
                 <label for="cgpa">Enter the CGPA:</label>
-                <input type="number" required>
+                <input type="number" id="cgpa" required>
                 <button type="submit">Edit Student</button>
             </form>
         </main>
     </div>
+    <script>
+            const editIndex = localStorage.getItem("editIndex");
+            const students = JSON.parse(localStorage.getItem("students")) || [];
+            const editForm = document.getElementById("editForm");
+            const student = students[editIndex];
+            const rollnoInput = document.getElementById("rollno");
+            const nameInput = document.getElementById("name");  
+            const branchInput = document.getElementById("branch");
+            const cgpaInput = document.getElementById("cgpa");
+            rollnoInput.value = student.rollno;
+            nameInput.value = student.name;
+            branchInput.value = student.branch;
+            
+    </script>
 </body>
 </html>

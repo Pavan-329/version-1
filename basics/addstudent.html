@@ -12,26 +12,51 @@
     <div class="container">
         <header>
             <nav>
-                <a href="/addstudent.html">Add Student</a>
-                <a href="/viewstudents.html">View Students</a>
-                <a href="/index.html">Logout</a>
+                <a href="./addstudent.html">Add Student</a>
+                <a href="./viewstudents.html">View Students</a>
+                <a href="./index.html">Logout</a>
             </nav>
         </header>
         <main>
             <h1>Add a Student</h1>
-            <form action="./viewstudents.html">
+            <form id="form">
                 <label for="rollNumber">Enter the Roll Number :</label>
-                <input type="text" required>
+                <input type="text" id="rollno" required>
                 <label for="name">Enter the Name :</label>
-                <input type="text" required>
+                <input type="text" id="name" required>
                 <label for="branch">Enter the Branch:</label>
-                <input type="text" required>
+                <input type="text" id="branch" required>
                 <label for="cgpa">Enter the CGPA:</label>
-                <input type="number" required>
+                <input type="number" id="cgpa" required>
                 <button type="submit">Add Student</button>
             </form>
         </main>
     </div>
-</body>
+    <script>
+        const form = document.querySelector("form");
 
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const rollno = document.getElementById("rollno").value;
+            const name = document.getElementById("name").value;
+            const branch = document.getElementById("branch").value;
+            const cgpa = document.getElementById("cgpa").value;
+
+            const student = {
+                rollno,
+                name,
+                branch,
+                cgpa
+            };
+
+            let students = JSON.parse(localStorage.getItem("students")) || [];
+            students.push(student);
+            localStorage.setItem("students", JSON.stringify(students));
+            alert("Student Added Successfully!");
+            form.reset();
+            window.location.href = "./viewstudents.html";
+        });
+        </script>
+</body>
 </html>

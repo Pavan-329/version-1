@@ -10,21 +10,53 @@
     <div class="container">
         <header>
             <nav>
-                <a href="/index.html">Home</a>
-                <a href="/login.html">Login</a>
-                <a href="/register.html">Register</a>
+                <a href="./index.html">Home</a>
+                <a href="./login.html">Login</a>
+                <a href="./register.html">Register</a>
             </nav>
         </header>
+
         <main class="centered">
             <h1>Login</h1>
-            <form action="./dashboard.html">
+
+            <form id="loginForm">
                 <label>Username :</label>
-                <input type="text" required>
+                <input type="text" id="loginUsername" required>
+
                 <label>Password :</label>
-                <input type="password" required>
-                <button type="submit">Submit</button>
-            </form> 
+                <input type="password" id="loginPassword" required>
+
+                <button type="submit">Login</button>
+            </form>
         </main>
     </div>
+
+    <script>
+        document.getElementById("loginForm")
+        .addEventListener("submit", function(e) {
+
+            e.preventDefault();
+
+            const username =
+                document.getElementById("loginUsername").value;
+
+            const password =
+                document.getElementById("loginPassword").value;
+
+            const user =
+                JSON.parse(localStorage.getItem("user"));
+
+            if (
+                user &&
+                user.username === username &&
+                user.password === password
+            ) {
+                alert("Login Successful!");
+                window.location.href = "./dashboard.html";
+            } else {
+                alert("Invalid Username or Password");
+            }
+        }); 
+    </script>
 </body>
 </html>
